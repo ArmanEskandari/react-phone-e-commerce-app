@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../logo.svg";
+import styled from "styled-components";
+import { ButtonContainer } from "./Button";
 
 export default function Navbar() {
   return (
@@ -21,10 +23,12 @@ export default function Navbar() {
         </li>
       </ul>
       <Link to="/cart" className="ml-auto">
-        <button className="">
-          <i className="fas fa-cart-plus mr-2" />
+        <ButtonContainer className="">
+          <span className="mr-2">
+            <i className="fas fa-cart-plus" />
+          </span>
           my cart
-        </button>
+        </ButtonContainer>
       </Link>
     </nav>
   );
