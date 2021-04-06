@@ -6,6 +6,7 @@ const ProductContext = React.createContext();
 const ProductProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [detail, setDetail] = useState([]);
+  const [cart, setCart] = useState([]);
 
   // we did this because we didn't want to mutate the data.js
   useEffect(() => {
@@ -28,8 +29,16 @@ const ProductProvider = (props) => {
     setDetail(product);
   };
 
-  const addToCart = () => {
-    console.log("hello from add to cart");
+  const addToCart = (id) => {
+    let tempProducts = [...products];
+    const index = tempProducts.indexOf(getItem(id));
+    const product = tempProducts[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    setProducts(tempProducts);
+    setCart([...cart, product]);
   };
 
   return (
