@@ -5,7 +5,7 @@ const ProductContext = React.createContext();
 
 const ProductProvider = (props) => {
   const [products, setProducts] = useState([]);
-  const [detail] = useState(detailProduct);
+  const [detail, setDetail] = useState([]);
 
   // we did this because we didn't want to mutate the data.js
   useEffect(() => {
@@ -17,8 +17,15 @@ const ProductProvider = (props) => {
     setProducts(() => tempProducts);
   }, []);
 
-  const handleDetail = () => {
-    console.log("hello from detail");
+  const getItem = (id) => {
+    const product = products.find((item) => item.id === id);
+    return product;
+  };
+
+  const handleDetail = (id) => {
+    console.log("clicked item", id);
+    const product = getItem(id);
+    setDetail(product);
   };
 
   const addToCart = () => {
