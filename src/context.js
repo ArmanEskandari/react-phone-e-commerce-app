@@ -9,6 +9,9 @@ const ProductProvider = (props) => {
   const [cart, setCart] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalDetail, setModalDetail] = useState(detail);
+  const [cartSubTotal, setCartSubtotal] = useState(0);
+  const [cartTax, setCartTax] = useState(0);
+  const [cartTotal, setCarttotal] = useState(0);
 
   // we did this because we didn't want to mutate the data.js
   useEffect(() => {
@@ -55,6 +58,23 @@ const ProductProvider = (props) => {
     setModalOpen(false);
   };
 
+  const increment = (id) => {
+    console.log("incremented");
+  };
+
+  const decrement = (id) => {
+    console.log("decremented");
+  };
+
+  const removeItem = (id) => {
+    const newProducts = products.filter((item) => item.id !== id);
+    setProducts(newProducts);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -66,6 +86,10 @@ const ProductProvider = (props) => {
         closeModal,
         modalOpen,
         modalDetail,
+        removeItem,
+        increment,
+        decrement,
+        clearCart,
       }}>
       {props.children}
     </ProductContext.Provider>
