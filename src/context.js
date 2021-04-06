@@ -5,8 +5,10 @@ const ProductContext = React.createContext();
 
 const ProductProvider = (props) => {
   const [products, setProducts] = useState([]);
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState(detailProduct);
   const [cart, setCart] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalDetail, setModalDetail] = useState(detail);
 
   // we did this because we didn't want to mutate the data.js
   useEffect(() => {
@@ -16,6 +18,7 @@ const ProductProvider = (props) => {
       tempProducts = [...tempProducts, singleItem];
     });
     setProducts(() => tempProducts);
+    // setModalOpen(true);
   }, []);
 
   const getItem = (id) => {
@@ -30,6 +33,7 @@ const ProductProvider = (props) => {
   };
 
   const addToCart = (id) => {
+    console.log(modalOpen);
     let tempProducts = [...products];
     const index = tempProducts.indexOf(getItem(id));
     const product = tempProducts[index];
@@ -41,9 +45,28 @@ const ProductProvider = (props) => {
     setCart([...cart, product]);
   };
 
+  const openModal = (id) => {
+    setModalOpen(true);
+    const product = getItem(id);
+    setModalDetail(product);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <ProductContext.Provider
-      value={{ products, detail, handleDetail, addToCart }}>
+      value={{
+        products,
+        detail,
+        handleDetail,
+        addToCart,
+        openModal,
+        closeModal,
+        modalOpen,
+        modalDetail,
+      }}>
       {props.children}
     </ProductContext.Provider>
   );

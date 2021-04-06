@@ -22,7 +22,9 @@ export default function Product({ product }) {
                 className="cart-btn"
                 disabled={inCart}
                 onClick={() => {
+                  console.log("added to cart");
                   value.addToCart(id);
+                  value.openModal(id);
                 }}>
                 {inCart ? (
                   <p className="text-capitalize mb-0" disabled>
