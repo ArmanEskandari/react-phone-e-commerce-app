@@ -23,7 +23,6 @@ export default function CartColumns() {
           <p className="text-uppercase">total</p>
         </div>
       </div>
-      this is CartColumns
     </div>
   );
 }
